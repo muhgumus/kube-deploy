@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Cleanup image from Gitlab registry. First parameter must be the full path to the iamge to be removed.
+# Cleanup image from Gitlab registry . First parameter must be the full path to the iamge to be removed.
 
 set -e
 
