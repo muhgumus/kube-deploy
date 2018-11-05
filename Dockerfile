@@ -10,7 +10,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
-ENV KUBE_LATEST_VERSION="v1.3.5"
+ENV KUBE_LATEST_VERSION="v1.12.2"
 
 ADD delete_image.sh /delete_image.sh
 
@@ -24,5 +24,4 @@ RUN apk add --update ca-certificates \
  && chmod +x /delete_image.sh \
  && rm /var/cache/apk/*
 
-ENTRYPOINT ["kubectl"]
-CMD ["help"]
+ENTRYPOINT ["sh"]
