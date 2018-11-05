@@ -2,6 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Muhammed GÜMÜŞ <muhammet.gumus@architecht.com>
 
+ARG VCS_REF
 ARG BUILD_DATE
 
 # Metadata
