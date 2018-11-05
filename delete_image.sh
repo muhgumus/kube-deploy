@@ -22,10 +22,10 @@ GITLAB_URL=$(echo $CI_PROJECT_URL | awk -F/ '{print $1"//"$3}')
 # Authenticates with Gitlab Registry
 # CI_ACCOUNT env var should contain "login:password" of a user that has access to repository
 TOKEN=$(curl -s -u "$CI_ACCOUNT" "${GITLAB_URL}/jwt/auth?client_id=docker&offline_token=true&service=container_registry&scope=repository:${PROJECT}:pull,*" | sed -r "s/(\{\"token\":\"|\"\})//g")
-#echo $TOKEN
+echo $TOKEN
 
 # Obtain digest from tag name
-#echo curl -sI -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -H "Authorization: Bearer $TOKEN" https://${CI_REGISTRY}/v2/${CI_PROJECT_PATH}/manifests/$CI_COMMIT_REF_SLUG | grep -Fi Docker-Content-Digest | sed -e 's/Docker-Content-Digest: //' -e 's/\:/\\:/'
+echo curl -sI -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -H "Authorization: Bearer $TOKEN" https://${CI_REGISTRY}/v2/${CI_PROJECT_PATH}/manifests/$CI_COMMIT_REF_SLUG | grep -Fi Docker-Content-Digest | sed -e 's/Docker-Content-Digest: //' -e 's/\:/\\:/'
 DIGEST=$(curl -sI -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -H "Authorization: Bearer $TOKEN" https://${CI_REGISTRY}/v2/${PROJECT}/manifests/$TAG | grep -Fi Docker-Content-Digest | sed -e "s/Docker-Content-Digest: //" -e "s/\:/\\:/" | sed 's/\r$//')
 
 # Removes pipeline-built Docker image from Gitlab's registry
