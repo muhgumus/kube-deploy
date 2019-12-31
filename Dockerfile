@@ -18,6 +18,7 @@ ADD delete_image.sh /delete_image.sh
 RUN apk add --update ca-certificates \
  && apk add --update curl \
  && apk add --update jq \
+ && apk add --update yq \
  && apk add --update gettext \
  && apk add --update bash \
  && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
