@@ -16,8 +16,6 @@ ENV KUBE_LATEST_VERSION="v1.12.2"
 ADD delete_image.sh /delete_image.sh
 
 RUN apk add --update ca-certificates \
- && apk add --update --no-cache py-pip jq=1.5-r4 \
- && pip install --no-cache-dir yq==2.4.1 \
  && apk add --update curl \
  && apk add --update jq \
  && apk add --update gettext \
