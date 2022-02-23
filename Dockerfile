@@ -26,4 +26,7 @@ RUN apk add --update ca-certificates \
  && chmod +x /delete_image.sh \
  && rm /var/cache/apk/*
 
+RUN git config --global user.email "ci@kube.deploy"
+RUN git config --global user.name "CI Pipeline"
+
 ENTRYPOINT ["sh"]
