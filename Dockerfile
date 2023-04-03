@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM docker:stable
 
 MAINTAINER Muhammed GÜMÜŞ <muhammet.gumus@architecht.com>
 
@@ -13,7 +13,11 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 
 ENV KUBE_LATEST_VERSION="v1.19.2"
 
-ADD delete_image.sh /delete_image.sh
+RUN apk update
+RUN apk add wget
+RUN wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+RUN chmod a+x /usr/local/bin/yq
+RUN yq --version
 
 RUN apk add --update ca-certificates \
  && apk add --update curl \
@@ -23,7 +27,6 @@ RUN apk add --update ca-certificates \
  && apk add --update git \
  && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
  && chmod +x /usr/local/bin/kubectl \
- && chmod +x /delete_image.sh \
  && rm /var/cache/apk/*
 
 RUN git config --global user.email "ci@kube.deploy"
