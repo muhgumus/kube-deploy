@@ -25,6 +25,7 @@ RUN apk add --update ca-certificates \
  && apk add --update gettext \
  && apk add --update bash \
  && apk add --update git \
+ && apk add --update openssh \
  && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
  && chmod +x /usr/local/bin/kubectl \
  && rm /var/cache/apk/*
